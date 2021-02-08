@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+
+input[type='text']
+  input[type='password']
+  input[type='email']
+  input[type='number']
+  input[type='url']
+  input[type='date']
+  input[type='datetime-local']
+  input[type='month']
+  input[type='week']
+  input[type='time']
+  input[type='search']
+  input[type='tel']
+  input[type='checkbox']
+  input[type='radio']
+  select
+  select[multiple]
+  textarea
+  * {
+  box-sizing: border-box;
+}
+
+.btn {
+  @apply flex px-5 py-2 mx-auto mt-6 font-bold border-0 rounded focus:outline-none;
+}
+.btn-blue {
+  @apply text-white bg-primary hover:bg-lightblue-700;
+}
+.btn-red {
+  @apply text-white bg-red-700;
+}
+
+.btn-red:hover {
+  @apply bg-red-700;
+}
+#main {
+  min-height: calc(100vh - 127px);
+}
+@tailwind utilities;
