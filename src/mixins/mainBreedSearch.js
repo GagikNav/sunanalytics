@@ -1,9 +1,14 @@
 export default {
 
   methods: {
+
+    //  This is main search and validation function
+    // I am checking if the breeds and sub breeds are matching
+
     mainBreedSearch ()
     {
-      this.classifyBreedArr.map(word =>
+      let errors = {}
+      this.classifyBreedArr.map(word => //looping through founded words 
       {
         this.mainBreeds.map(breed =>
         {
@@ -17,11 +22,13 @@ export default {
             return;
 
           }
+          errors.breed = 'Sorry we can not find your Dog'
+
           return;
         });
       });
 
-      
+      this.uploadedImageValidation = { ...errors };
     }
   }
 }

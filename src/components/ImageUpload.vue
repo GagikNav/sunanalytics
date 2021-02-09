@@ -1,38 +1,43 @@
 <template>
-  <div class="container p-2 mx-auto bg-blue-400">
-    <label v-show="!uploadedImage"
-      >Select image
-      <input type="file" @change="onFileChange" />
-    </label>
-    <div class="flex p-5">
-      <img v-show="uploadedImage" :src="uploadedImage" alt="" />
-      <div v-show="uploadedImage" class="w-3/6 m-auto bg-gray-100 p-auto">
-        <div v-if="classify[0]">
-          <p>Our best prediction is</p>
-          <p>{{ classify[0].className }}</p>
-          <p>with {{ (classify[0].probability * 100).toFixed(1) }} %</p>
-        </div>
-        <div v-if="!classify.length">loading prediction</div>
-        <button @click="remove" class="btn">close</button>
-      </div>
+  <div v-if="!classify.length">loading prediction</div>
+  <!-- .. -->
+  <div class="container mx-auto bg-gray-100 ">
+    <InputForm
+      :onFileChange="onFileChange"
+      :remove="remove"
+      :getDogs="getDogs"
+      :isImage="classifyBreedArr"
+      :validator="uploadedImageValidation"
+    />
+  </div>
+  <div v-show="uploadedImage" class="w-3/6 m-auto bg-gray-500 h-80 p-auto">
+    <img :src="uploadedImage" alt="" class="h-full mx-auto" />
+    <div v-if="classify[0]">
+      <p>Our best prediction is</p>
+      <p>{{ classify[0].className }}</p>
+      <p>with {{ (classify[0].probability * 100).toFixed(1) }} %</p>
     </div>
   </div>
 
-  <button @click="getDogs" class="btn btn-blue">Get images</button>
-
-  <div v-if="dogsImages" class="flex flex-wrap justify-center">
+  <!-- Images Card Section -->
+  <div
+    v-if="dogsImages"
+    class="container flex flex-wrap items-center justify-center gap-10 mx-auto mt-20 max-w-7xl"
+  >
     <ViewImage
-      class="object-scale-down w-2/5 m-10 max-h-96"
       v-for="(image, index) in dogsImages"
       :key="index"
       :imgUrl="image"
-      alt=""
     />
   </div>
 </template>
 
 <script>
+  // Import Components...
+
+  import InputForm from './InputForm';
   import ViewImage from './ViewImage';
+  // Import Mixins...
   import getFile from '../mixins/getFile';
   import mainBreedSearch from '../mixins/mainBreedSearch';
   import getDogs from '../mixins/getDogs';
@@ -42,35 +47,37 @@
     mixins: [getFile, mainBreedSearch, createImage, getDogs],
     components: {
       ViewImage,
+      InputForm,
     },
 
     data() {
       return {
-        observer: null,
-        uploadedImage: true,
-        img_name: '',
+        uploadedImageValidation: {}, // I created this Object for multipurpose validation
+        uploadedImage: '', // Coming from createImage mixin
+        uploadedFile: null,
         classify: [],
-        classifyBreedArr: [],
+        classifyBreedArr: [], //returned array from TensorFlow
         loading: false,
         dogsImages: [],
-        mainBreeds: [],
-        fullBreeds: {},
+        mainBreeds: [], //created for search in main breed
+        fullBreeds: {}, // this full breeds array getting on the created hook
         foundBreed: {},
       };
     },
+    beforeMount() {
+      this.remove();
+    },
     methods: {
-      // TODO if there is image API calls  should be disabled hidden!!
-      //mainBreedSearch goes here
+      //Mixins are here, I separated  theme to avoid log file
       // ..
-
-      // Show uploaded images
-
-      // Get dog method
 
       remove() {
         this.uploadedImage = false;
         this.dogsImages = [];
         this.foundBreed = {};
+        this.uploadedFile = null;
+        this.uploadedImageValidation = {};
+        this.classifyBreedArr = [];
       },
     },
   };

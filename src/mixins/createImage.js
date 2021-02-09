@@ -9,9 +9,10 @@ export default {
       const reader = new FileReader();
       reader.onload = async e => {
         this.uploadedImage = e.target.result;
-        const version = 1;
-        const alpha = 0.75;
+        const version = 1; //Tensor Flow Version
+        const alpha = 0.75; // Tensor Flow Accuracy
         img.src = e.target.result;
+        // TensorFlow Check
         const model = await mobilenet.load({ version, alpha });
         const prediction = await model.classify(img);
         this.loading = false;

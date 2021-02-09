@@ -1,36 +1,42 @@
 export default {
   methods: {
+    getExtension(filename) {
+      //File type validation function
+      let parts = filename.split('.');
+      return parts[parts.length - 1];
+    },
+
+    isImage(filename) {
+      // File size validation function
+      let ext = this.getExtension(filename);
+      switch (ext.toLowerCase()) {
+        case 'jpg':
+        case 'gif':
+        case 'bmp':
+        case 'png':
+        case 'jpeg':
+          return true;
+      }
+      return false;
+    },
+
+    // ..
+    // main file uploader function
     onFileChange(e) {
+      let errors = {};
       this.loading = true;
-      const files = e.target.files || e.dataTransfer.files;
-      this.createImage(files[0]);
-      // Separate by extension (*. Is one assumption)
-      const imgNameExe = files[0].name.split('.');
-
-      // Before extension
-      let imgName = imgNameExe[0];
-
-      // Back from extension
-      const imgExe = imgNameExe[1];
-
-      //Max Bytes to display (10 full-width characters, 20 half-width characters)
-      const maxBytes = 20;
-      const imgNameBytes = encodeURIComponent(imgName).replace(/%../g, 'x')
-        .length;
-
-      //Comparison of image file and Max Byte number
-      if (imgNameBytes > maxBytes) {
-        const zenkaku = imgNameBytes - imgName.length;
-        if (zenkaku > 0) {
-          imgName = imgName.slice(0, maxBytes / 2 - imgName.length) + '..';
-        } else {
-          imgName = imgName.slice(0, maxBytes - imgNameBytes) + '..';
-        }
+      this.uploadedFile = e.target.files || e.dataTransfer.files;
+      this.createImage(this.uploadedFile[0]);
+      // Here I am checking for validations
+      // and creating error object
+      if (this.uploadedFile[0].size > 1200000) {
+        errors.fileSize = 'Please select file smaller than 1 MB';
       }
 
-      // Concatenation of short cut and. And extension string
-      imgName = imgName + '.' + imgExe;
-      this.img_name = imgName;
+      if (!this.isImage(this.uploadedFile[0].name)) {
+        errors.fileType = 'Please select correct image type';
+      }
+      this.uploadedImageValidation = { ...errors };
     },
   },
 };
