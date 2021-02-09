@@ -13,7 +13,10 @@ export default {
         const alpha = 0.75; // Tensor Flow Accuracy
         img.src = e.target.result;
         // TensorFlow Check
-        const model = await mobilenet.load({ version, alpha });
+        const model = await mobilenet.load({
+          version,
+          alpha,
+        });
         const prediction = await model.classify(img);
         this.loading = false;
         this.classify = prediction;
@@ -24,6 +27,8 @@ export default {
           .toLowerCase()
           .split(',')[0]
           .split(' ');
+
+        this.mainBreedSearch(); // Calling Main search here
       };
       reader.readAsDataURL(file);
     },

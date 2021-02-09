@@ -1,42 +1,41 @@
 <template lang="">
-  <div class="flex flex-col items-start justify-start">
-    <label for="name" class="mb-8 text-lg font-bold text-gray-800"
-      >Select Your Gog Image</label
-    >
-    <input
-      class="w-full h-12 bg-gray-200"
-      type="file"
-      name="file"
-      accept="image/jpeg, image/png"
-      @change="onFileChange"
-    />
-    <div class="flex items-center justify-center w-2/4 gap-10 bg-gray-600 h-36">
-      <button @click="remove" class="btn btn-gray">close</button>
-
+  <div
+    class="flex flex-col items-center justify-center max-w-3xl mx-auto my-28 sm:flex-row sm:justify-center choose-file"
+  >
+    <label
+      class="w-full mb-10 text-2xl font-bold text-center text-gray-800 sm:text-3xl sm:m-0 max-h-150 sm:text-left"
+      for="name"
+      >Upload your lovely dog's picture...
+    </label>
+    <div class="w-44">
       <button
-        @click="getDogs"
-        v-if="
-          !validator.fileSize &&
-            !validator.fileType &&
-            !validator.breed &&
-            !validator.gotImages &&
-            isImage[0]
-        "
-        class="btn btn-blue"
+        @click="triggerUpload"
+        class="w-full text-lg font-semibold text-center btn btn-primary max-h-150"
       >
-        Get images
+        Brows
       </button>
+      <input
+        ref="input"
+        class="hidden"
+        type="file"
+        name="file"
+        accept="image/jpeg, image/png"
+        @change="onFileChange"
+      />
     </div>
   </div>
 </template>
 <script>
   export default {
+    methods: {
+      triggerUpload() {
+        this.remove();
+        this.$refs.input.click();
+      },
+    },
     props: {
-      onFileChange: Function,
       remove: Function,
-      getDogs: Function,
-      validator: Object,
-      isImage: Array,
+      onFileChange: Function,
     },
   };
 </script>

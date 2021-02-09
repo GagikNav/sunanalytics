@@ -7,9 +7,9 @@ export default {
 
     mainBreedSearch ()
     {
-      let errors = {}
+      let errors = {};
       this.classifyBreedArr.map(word => //looping through founded words 
-      {
+        {
         this.mainBreeds.map(breed =>
         {
           if (breed === word)
@@ -20,16 +20,20 @@ export default {
               this.fullBreeds.[ breed ].map(subBreed => this.classifyBreedArr.map(subWord => subWord === subBreed ? this.foundBreed.subBreed = subBreed : ''));
             }
             return;
-
-          }
-          errors.breed = 'Sorry we can not find your Dog'
-
-          return;
+            
+          } 
+            return;
+          
+          
         });
       });
-
-      this.uploadedImageValidation = { ...errors };
+      if (!this.foundBreed.mainBreed)
+      {
+        errors.breed = 'Sorry we can not find your Dog';
+      }
+      this.uploadedImageValidation = {...this.uploadedImageValidation,...errors };
     }
   }
 }
+
 

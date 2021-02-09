@@ -22,11 +22,11 @@ export default {
 
     // ..
     // main file uploader function
-    onFileChange(e) {
+    async onFileChange(e) {
       let errors = {};
       this.loading = true;
       this.uploadedFile = e.target.files || e.dataTransfer.files;
-      this.createImage(this.uploadedFile[0]);
+
       // Here I am checking for validations
       // and creating error object
       if (this.uploadedFile[0].size > 1200000) {
@@ -36,7 +36,14 @@ export default {
       if (!this.isImage(this.uploadedFile[0].name)) {
         errors.fileType = 'Please select correct image type';
       }
-      this.uploadedImageValidation = { ...errors };
+
+      this.uploadedImageValidation = {
+        ...this.uploadedImageValidation,
+        ...errors,
+      };
+      if (!errors.type && !errors.fileSize) {
+        this.createImage(this.uploadedFile[0]);
+      }
     },
   },
 };

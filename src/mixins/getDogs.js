@@ -10,8 +10,6 @@ export default {
   methods: {
     async getDogs() {
       let errors = {};
-      this.mainBreedSearch();
-
       // Here I am Checking if there is is a sub Breed to call API accordingly
       const { data } = await axios.get(
         this.foundBreed.subBreed
@@ -21,6 +19,7 @@ export default {
 
       try {
         data.message.map(img => this.dogsImages.push(img));
+        // Image repeat Error
         errors.gotImages = 'We got Images once if you need more please refresh';
       } catch (error) {
         console.error('error', error);

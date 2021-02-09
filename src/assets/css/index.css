@@ -23,12 +23,12 @@ input[type='text']
 }
 
 .btn {
-  @apply flex px-5 py-2 mx-auto mt-6 font-bold border-0 rounded focus:outline-none;
+  @apply py-2 mx-auto font-bold text-center border-0 rounded focus:outline-none disabled:opacity-50;
 }
-.btn-blue {
+.btn-primary {
   @apply text-white bg-primary hover:bg-primaryDark;
 }
-.btn-gray {
+.btn-secondary {
   @apply text-white bg-secondary hover:bg-secondaryLight;
 }
 .btn-red {
@@ -38,7 +38,8 @@ input[type='text']
 .btn-red:hover {
   @apply bg-red-700;
 }
-#main {
-  min-height: calc(100vh - 127px);
+.btn-primary-outline {
+  @apply h-10 px-5 transition-colors duration-150 border rounded-lg text-primary border-primary focus:shadow hover:bg-primaryDark hover:text-indigo-100;
 }
+
 @tailwind utilities;

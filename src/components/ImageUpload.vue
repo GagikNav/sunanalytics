@@ -1,28 +1,35 @@
 <template>
-  <div v-if="!classify.length">loading prediction</div>
-  <!-- .. -->
-  <div class="container mx-auto bg-gray-100 ">
-    <InputForm
-      :onFileChange="onFileChange"
-      :remove="remove"
-      :getDogs="getDogs"
-      :isImage="classifyBreedArr"
-      :validator="uploadedImageValidation"
-    />
-  </div>
-  <div v-show="uploadedImage" class="w-3/6 m-auto bg-gray-500 h-80 p-auto">
-    <img :src="uploadedImage" alt="" class="h-full mx-auto" />
-    <div v-if="classify[0]">
-      <p>Our best prediction is</p>
-      <p>{{ classify[0].className }}</p>
-      <p>with {{ (classify[0].probability * 100).toFixed(1) }} %</p>
+  <div class="container mx-auto ">
+    <!-- Main picture  -->
+
+    <!-- upload section -->
+
+    <InputForm :onFileChange="onFileChange" :remove="remove" />
+
+    <!-- Image Preview Section -->
+    <div v-show="uploadedImage" class="flex flex-col justify-around mx-auto ">
+      <img :src="uploadedImage" alt="" class="mx-auto w-2xl h-80" />
+
+      <div v-if="!classify[0]" class="flex items-center justify-center ">
+        loading prediction...
+        <img
+          src="../../public/Spinner-1s-200px.gif"
+          style="height: 70px; width: 70px "
+          alt=""
+        />
+      </div>
     </div>
   </div>
 
+  <OperationButtons
+    :getDogs="getDogs"
+    :isImage="classifyBreedArr"
+    :validator="uploadedImageValidation"
+  />
   <!-- Images Card Section -->
   <div
     v-if="dogsImages"
-    class="container flex flex-wrap items-center justify-center gap-10 mx-auto mt-20 max-w-7xl"
+    class="flex flex-wrap items-center justify-center gap-10 mx-auto mt-20 max-w-7xl"
   >
     <ViewImage
       v-for="(image, index) in dogsImages"
@@ -37,6 +44,7 @@
 
   import InputForm from './InputForm';
   import ViewImage from './ViewImage';
+  import OperationButtons from './OperationButtons';
   // Import Mixins...
   import getFile from '../mixins/getFile';
   import mainBreedSearch from '../mixins/mainBreedSearch';
@@ -44,10 +52,12 @@
   import createImage from '../mixins/createImage';
 
   export default {
+    name: 'ImageUpload',
     mixins: [getFile, mainBreedSearch, createImage, getDogs],
     components: {
       ViewImage,
       InputForm,
+      OperationButtons,
     },
 
     data() {
@@ -78,6 +88,7 @@
         this.uploadedFile = null;
         this.uploadedImageValidation = {};
         this.classifyBreedArr = [];
+        this.classify = [];
       },
     },
   };

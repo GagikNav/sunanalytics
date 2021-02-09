@@ -1,9 +1,15 @@
 <template>
   <figure
     v-LazyLoad
-    class="w-full overflow-hidden rounded-lg h-80 sm:w-3/12 md:h-full"
+    class="w-full overflow-hidden rounded-lg shadow-md h-80 xl:w-1/4 sm:w-2/6 md:h-full"
   >
-    <img :data-url="imgUrl" alt="dog image" class="object-cover w-full h-80" />
+    <img
+      :data-url="imgUrl"
+      src="../../public/Spinner-1s-200px.gif"
+      alt="Dog Image"
+      class="object-cover w-full h-80"
+      loading="lazy"
+    />
   </figure>
 </template>
 <script>
