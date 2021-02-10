@@ -133,8 +133,8 @@
         popBreeds: ['Corgi', 'Pug', 'Retriever', 'Husky'],
         contacts: {
           email: {
-            title: 'gagik.ne@gmail.com',
-            link: '#',
+            title: 'gagik.n@gmail.com',
+            link: 'mailto: gagik.n@gmail.com',
             icon: 'px-2 fas fa-envelope',
           },
           website: {

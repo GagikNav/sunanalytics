@@ -1,55 +1,44 @@
 <template>
   <div class="container mx-auto ">
-    <!-- Main picture  -->
-
     <!-- upload section -->
 
     <InputForm :onFileChange="onFileChange" :remove="remove" />
 
     <!-- Image Preview Section -->
-    <div v-show="uploadedImage" class="flex flex-col justify-around mx-auto ">
-      <img :src="uploadedImage" alt="" class="mx-auto w-2xl h-80" />
+    <UploadedImagePreview :uploadedImage="uploadedImage" :classify="classify" />
 
-      <div v-if="!classify[0]" class="flex items-center justify-center ">
-        loading prediction...
-        <img
-          src="../../public/Spinner-1s-200px.gif"
-          style="height: 70px; width: 70px "
-          alt=""
-        />
-      </div>
-    </div>
-  </div>
-
-  <OperationButtons
-    :getDogs="getDogs"
-    :isImage="classifyBreedArr"
-    :validator="uploadedImageValidation"
-    :dogsImages="dogsImages"
-    :classify="classify"
-    :foundBreed="foundBreed"
-  />
-  <!-- Images Card Section -->
-
-  <div
-    v-if="dogsImages"
-    class="flex flex-wrap items-center justify-center gap-10 mx-auto mt-5 max-w-7xl"
-  >
-    <ViewImage
-      v-for="(image, index) in dogsImages"
-      :key="index"
-      :imgUrl="image"
+    <OperationButtons
+      :getDogs="getDogs"
+      :isImage="classifyBreedArr"
+      :validator="uploadedImageValidation"
+      :dogsImages="dogsImages"
+      :classify="classify"
+      :foundBreed="foundBreed"
     />
+    <!-- Images Card Section -->
+
+    <div
+      v-if="dogsImages"
+      class="flex flex-wrap items-center justify-center gap-10 mx-auto mt-5 max-w-7xl"
+    >
+      <ViewImage
+        v-for="(image, index) in dogsImages"
+        :key="index"
+        :imgUrl="image"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-  // Import modulus
+  // Import modules
+
   import axios from 'axios';
 
   // Import Components...
 
   import InputForm from './InputForm';
+  import UploadedImagePreview from './UploadedImagePreview';
   import ViewImage from './ViewImage';
   import OperationButtons from './OperationButtons';
   // Import Mixins...
@@ -65,6 +54,7 @@
       ViewImage,
       InputForm,
       OperationButtons,
+      UploadedImagePreview,
     },
 
     data() {
