@@ -1,6 +1,10 @@
 <template>
   <div id="main" class="text-center">
-    <h1 class="text-3xl">This About Page</h1>
+    <p class="max-w-md mx-auto mt-20 text-2xl leading-relaxed ">
+      Tis simple app takes your lovely Dog image and tries to recognize it via
+      "TensorFlow" machine learning API. Then it finds best matches for your Dog
+      from DohAPI so you can see more doge like yours!
+    </p>
   </div>
 </template>
 
