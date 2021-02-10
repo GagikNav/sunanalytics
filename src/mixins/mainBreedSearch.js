@@ -29,7 +29,7 @@ export default {
       });
       if (!this.foundBreed.mainBreed)
       {
-        errors.breed = 'Sorry we can not find your Dog';
+        errors.breed = 'Sorry we can not find a match for your image';
       }
       this.uploadedImageValidation = {...this.uploadedImageValidation,...errors };
     }

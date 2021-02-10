@@ -46,13 +46,34 @@
       class="relative flex flex-col h-auto px-5 py-3 mt-10 text-xs font-light text-center bg-footer text-footerText"
     >
       <div
-        class="grid grid-cols-1 p-0 font-light sm:grid-cols-2 md:p-2 md:grid-cols-3 "
+        class="grid grid-cols-1 p-0 font-light sm:grid-cols-2 md:p-2 md:grid-cols-4 "
       >
         <!--  -->
         <div id="g-1" class="flex flex-col items-center justify-center ">
           <div class="flex flex-col items-end">
             <img src="../src/assets/logo.png" alt="logo" class="w-44 " />
           </div>
+        </div>
+        <div id="g-2" class="flex flex-col items-start mt-5 sm:p-10">
+          <h3 class="text-lg font-semibold text-left text-primary">
+            Popular Breeds
+          </h3>
+          <ul class="flex flex-col items-start justify-start py-2">
+            <li
+              v-for="(popBreed, index) in popBreeds"
+              :key="index"
+              class="py-2 capitalize cursor-pointer hover:text-primary"
+            >
+              <router-link
+                :to="{
+                  name: 'PopularBreeds',
+                  params: { breed: popBreed.toLowerCase() },
+                }"
+              >
+                {{ popBreed }}
+              </router-link>
+            </li>
+          </ul>
         </div>
 
         <div id="g-3" class="flex flex-col items-start mt-5 sm:p-10 sm:flex ">
@@ -109,6 +130,7 @@
       return {
         showMenu: false,
         shortCuts: ['About', 'Home'],
+        popBreeds: ['Corgi', 'Pug', 'Retriever', 'Husky'],
         contacts: {
           email: {
             title: 'gagik.ne@gmail.com',

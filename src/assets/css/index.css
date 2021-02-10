@@ -42,4 +42,8 @@ input[type='text']
   @apply h-10 px-5 transition-colors duration-150 border rounded-lg text-primary border-primary focus:shadow hover:bg-primaryDark hover:text-indigo-100;
 }
 
+#main {
+  min-height: calc(100vh - 350px);
+}
+
 @tailwind utilities;

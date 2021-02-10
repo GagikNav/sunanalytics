@@ -25,11 +25,15 @@
     :getDogs="getDogs"
     :isImage="classifyBreedArr"
     :validator="uploadedImageValidation"
+    :dogsImages="dogsImages"
+    :classify="classify"
+    :foundBreed="foundBreed"
   />
   <!-- Images Card Section -->
+
   <div
     v-if="dogsImages"
-    class="flex flex-wrap items-center justify-center gap-10 mx-auto mt-20 max-w-7xl"
+    class="flex flex-wrap items-center justify-center gap-10 mx-auto mt-5 max-w-7xl"
   >
     <ViewImage
       v-for="(image, index) in dogsImages"
@@ -40,6 +44,9 @@
 </template>
 
 <script>
+  // Import modulus
+  import axios from 'axios';
+
   // Import Components...
 
   import InputForm from './InputForm';
@@ -77,6 +84,12 @@
     beforeMount() {
       this.remove();
     },
+    async created() {
+      const { data } = await axios.get('https://dog.ceo/api/breeds/list/all');
+      this.mainBreeds = Object.keys(data.message);
+      this.fullBreeds = data.message;
+    },
+
     methods: {
       //Mixins are here, I separated  theme to avoid log file
       // ..

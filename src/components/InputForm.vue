@@ -1,6 +1,6 @@
 <template lang="">
   <div
-    class="flex flex-col items-center justify-center max-w-3xl mx-auto my-28 sm:flex-row sm:justify-center choose-file"
+    class="flex flex-col items-center justify-center max-w-3xl mx-auto my-10 sm:flex-row sm:justify-center choose-file"
   >
     <label
       class="w-full mb-10 text-2xl font-bold text-center text-gray-800 sm:text-3xl sm:m-0 max-h-150 sm:text-left"
@@ -12,7 +12,7 @@
         @click="triggerUpload"
         class="w-full text-lg font-semibold text-center btn btn-primary max-h-150"
       >
-        Brows
+        Browse
       </button>
       <input
         ref="input"

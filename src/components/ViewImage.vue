@@ -1,7 +1,7 @@
 <template>
   <figure
     v-LazyLoad
-    class="w-full overflow-hidden rounded-lg shadow-md h-80 xl:w-1/4 sm:w-2/6 md:h-full"
+    class="w-full overflow-hidden rounded shadow-md h-80 xl:w-1/4 sm:w-2/6 md:h-full"
   >
     <img
       :data-url="imgUrl"

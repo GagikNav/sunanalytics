@@ -13,8 +13,4 @@
   };
 </script>
 
-<style lang="scss">
-  #main {
-    min-height: calc(100vh - 350px);
-  }
-</style>
+<style lang="scss"></style>

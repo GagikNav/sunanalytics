@@ -41,7 +41,7 @@ export default {
         ...this.uploadedImageValidation,
         ...errors,
       };
-      if (!errors.type && !errors.fileSize) {
+      if (!errors.fileType && !errors.fileSize) {
         this.createImage(this.uploadedFile[0]);
       }
     },
