@@ -89,4 +89,16 @@ I tried to write reusable codes like mixins and directives and also to shorten m
 
 - "lazyLoad" directive is a logic that I attached to images in order to show theme in lazy loading option. I used that in "ViewImage" component which basically it gets the URL and previews the image.
 
--
+- Mixins are consist of four logics
+
+  - "getFile" logic is for grabbing image file from browser and checking for errors like file-type and file-size, and put errors in the "uploadedImageValidation" object. Also it prevents upload unwanted ons.
+
+  - "createImage" gets file from "getFile" and creates a image and also calls for "TensorFlow" API and and put API's info into array then calls "mainBreedSearch".
+
+  - "mainBreedSearch" logic is responsible for searching breeds and subBreeds for the info from TensorFlow in the breeds object which came from DogApi at the created hook. Also it generates possible errors in "uploadedImageValidation" object.
+
+  - "getDogs" is a re usable logic for calling GogAPI to get breed/subBreed images.
+
+Also I tried to have as much as comment as possible in the code.
+
+---

@@ -15,7 +15,7 @@
       :classify="classify"
       :foundBreed="foundBreed"
     />
-    <!-- Images Card Section -->
+    <!-- Images Cards Section -->
 
     <div
       v-if="dogsImages"
@@ -74,6 +74,8 @@
     beforeMount() {
       this.remove();
     },
+
+    //  Here I'm calling api to get latest main breeds
     async created() {
       const { data } = await axios.get('https://dog.ceo/api/breeds/list/all');
       this.mainBreeds = Object.keys(data.message);
@@ -85,6 +87,7 @@
       // ..
 
       remove() {
+        //this function is for resting states
         this.uploadedImage = false;
         this.dogsImages = [];
         this.foundBreed = {};

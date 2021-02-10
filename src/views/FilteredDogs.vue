@@ -1,6 +1,17 @@
 <template>
   <div id="main" class="flex flex-col items-center justify-center w-full ">
     <div
+      v-if="dogsImages.length > 0"
+      class="p-3 mx-auto my-5 text-xl font-bold sm:text-2xl"
+    >
+      <p>
+        We found {{ dogsImages.length }} matches for
+        <span class="capitalize text-primary"> {{ breed }}</span> in our
+        database!
+      </p>
+    </div>
+
+    <div
       v-if="dogsImages"
       class="flex flex-wrap items-center justify-center gap-10 mx-auto mt-5 max-w-7xl"
     >

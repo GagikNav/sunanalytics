@@ -3,7 +3,7 @@ import * as mobilenet from '@tensorflow-models/mobilenet';
 export default {
   methods: {
     createImage(file) {
-      this.classify = [];
+      this.classify = []; //creating  prediction array
       let img = new Image();
       img.crossOrigin = 'anonymous';
       const reader = new FileReader();
@@ -12,6 +12,7 @@ export default {
         const version = 1; //Tensor Flow Version
         const alpha = 0.75; // Tensor Flow Accuracy
         img.src = e.target.result;
+
         // TensorFlow Check
         const model = await mobilenet.load({
           version,
@@ -20,9 +21,11 @@ export default {
         const prediction = await model.classify(img);
         this.loading = false;
         this.classify = prediction;
+
         // Finding highest probability match and put the string into
         // the "classifyBreedArr" array
         //
+
         this.classifyBreedArr = this.classify[0].className
           .toLowerCase()
           .split(',')[0]
@@ -30,7 +33,7 @@ export default {
 
         this.mainBreedSearch(); // Calling Main search here
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file); // file reader method
     },
   },
 };
