@@ -4,11 +4,7 @@
 
     <div v-if="!classify[0]" class="flex items-center justify-center ">
       loading prediction...
-      <img
-        src="../../public/Spinner-1s-200px.gif"
-        style="height: 70px; width: 70px "
-        alt=""
-      />
+      <img src="../../public/Spinner-1s-200px.gif" class="w-8 h-8" alt="" />
     </div>
   </div>
 </template>
@@ -16,7 +12,7 @@
   export default {
     name: 'UploadedImagePreview',
     props: {
-      uploadedImage: String,
+      uploadedImage: [String, Boolean],
       classify: Array,
     },
     //

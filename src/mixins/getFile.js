@@ -11,7 +11,6 @@ export default {
       let ext = this.getExtension(filename);
       switch (ext.toLowerCase()) {
         case 'jpg':
-        case 'gif':
         case 'bmp':
         case 'png':
         case 'jpeg':
@@ -30,11 +29,12 @@ export default {
       // Here I am checking for validations
       // and creating error object
       if (this.uploadedFile[0].size > 1200000) {
-        errors.fileSize = 'Please select file smaller than 1 MB';
+        errors.fileSize = 'Please select a file smaller than 1 MB';
       }
 
       if (!this.isImage(this.uploadedFile[0].name)) {
-        errors.fileType = 'Please select correct image type';
+        errors.fileType =
+          'Please select correct image type (jpeg, png, bmp, jpg)';
       }
 
       this.uploadedImageValidation = {

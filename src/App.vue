@@ -24,7 +24,7 @@
       <!-- this is menu section only show on mobile -->
       <div
         v-if="showMenu"
-        class="absolute right-0 flex flex-col items-end w-full gap-5 px-4 pb-5 bg-gray-50 top-20 md:hidden md:block"
+        class="absolute right-0 flex flex-col items-end w-full gap-5 px-4 pb-5 bg-gray-50 top-28 md:hidden md:block"
       >
         <router-link
           class="flex justify-end w-full px-4 py-2 rounded hover:bg-gray-200"
@@ -43,7 +43,7 @@
     <router-view />
     <footer
       id="main-footer"
-      class="relative flex flex-col h-auto px-5 py-3 mt-10 text-xs font-light text-center bg-footer text-footerText"
+      class="relative flex flex-col h-auto px-5 py-3 mt-20 text-xs font-light text-center bg-footer text-footerText "
     >
       <div
         class="grid grid-cols-1 p-0 font-light sm:grid-cols-2 md:p-2 md:grid-cols-4 "
@@ -54,6 +54,9 @@
             <img src="../src/assets/logo.png" alt="logo" class="w-44 " />
           </div>
         </div>
+
+        <!-- Here looping the breeds from data object below  to generate filtered links links-->
+
         <div id="g-2" class="flex flex-col items-start mt-5 sm:p-10">
           <h3 class="text-lg font-semibold text-left text-primary">
             Popular Breeds
@@ -118,6 +121,15 @@
       </div>
     </footer>
   </div>
+
+  <!-- This a back to top button -->
+  <button
+    class="fixed px-5 bottom-20 right-10 btn btn-primary "
+    @click="backToTop"
+    v-show="showToTop"
+  >
+    Back To top
+  </button>
 </template>
 <script>
   //
@@ -128,6 +140,7 @@
   export default {
     data() {
       return {
+        showToTop: false,
         showMenu: false,
         shortCuts: ['About', 'Home'],
         popBreeds: ['Corgi', 'Pug', 'Retriever', 'Husky'],
@@ -160,6 +173,26 @@
       date: () => {
         const d = new Date();
         return d.getFullYear();
+      },
+    },
+    created() {
+      window.addEventListener('scroll', this.handleScroll);
+    },
+    unmounted() {
+      window.removeEventListener('scroll', this.handleScroll);
+    },
+    methods: {
+      handleScroll() {
+        window.scrollY > 1200
+          ? (this.showToTop = true)
+          : (this.showToTop = false);
+      },
+      backToTop() {
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth',
+        });
       },
     },
   };

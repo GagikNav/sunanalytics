@@ -46,7 +46,6 @@
   import mainBreedSearch from '../mixins/mainBreedSearch';
   import getDogs from '../mixins/getDogs';
   import createImage from '../mixins/createImage';
-
   export default {
     name: 'ImageUpload',
     mixins: [getFile, mainBreedSearch, createImage, getDogs],
@@ -71,6 +70,7 @@
         foundBreed: {},
       };
     },
+
     beforeMount() {
       this.remove();
     },
@@ -95,6 +95,9 @@
         this.uploadedImageValidation = {};
         this.classifyBreedArr = [];
         this.classify = [];
+      },
+      handleScroll() {
+        console.log(window.scrollY);
       },
     },
   };
