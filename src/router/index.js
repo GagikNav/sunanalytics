@@ -10,7 +10,7 @@ const routes = [
     component: Home,
   },
   {
-    path: '/pop-breeds/:breed',
+    path: '/:breed',
     name: 'PopularBreeds',
     props: true,
     component: FilteredDogs,

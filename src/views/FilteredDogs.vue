@@ -27,20 +27,11 @@
       };
     },
     watch: {
-      breed() {
-        this.dogsImages = [];
-        console.log(typeof this.breed);
-        this.foundBreed.mainBreed = this.breed;
-        console.log(this.foundBreed.mainBreed);
-        window.scroll({
-          top: 0,
-          left: 0,
-          behavior: 'smooth',
-        });
-        this.getDogs('pug');
+      breed: {
+        handler: 'getFilteredImages',
+        immediate: true,
       },
     },
-    created() {},
 
     props: {
       breed: String,
@@ -48,6 +39,17 @@
     components: {
       ViewImage,
     },
-    methods: {},
+    methods: {
+      async getFilteredImages() {
+        this.dogsImages = [];
+        this.foundBreed.mainBreed = this.breed;
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth',
+        });
+        this.getDogs(this.foundBreed.mainBreed);
+      },
+    },
   };
 </script>
