@@ -1,10 +1,16 @@
 # Sun-Analytics-Dog-Matcher
 
+<br/>
+
+### This simple application gets a dog image after analyzing it with _"TensorFlow-mobilenet"_ API detects the breed and can grab same breed images from the _"DOG API"_.
+
+<br/>
+
 ## Description
 
 ### This is a front end Dog image matcher, which supports the following use cases:
 
-- ## Project’s main requirements according to the assignment:
+## Project’s main requirements according to the assignment:
 
 - Uploading a dog image on the browser, including showing a preview
 - Match the image via TensorFlow-mobilenet API
